@@ -10,6 +10,14 @@ Pre-alpha. Nothing released yet.
 
 ### Added
 
+- Plugin toolchain: pnpm 9, `@decky/ui`, `@decky/api`, rollup via `@decky/rollup`, plus Vitest,
+  ESLint and Prettier.
+- `src/steam/session.ts` — tracks the running game via `RegisterForAppLifetimeNotifications`.
+  Non-Steam shortcuts report app id 0 and are treated as "nothing we can help with" rather than
+  guessed at.
+- `src/data/device.ts` — identifies the handheld from DMI (`Jupiter` = LCD, `Galileo` = OLED) and
+  normalises the community corpus' inconsistent device labels.
+- `main.py` — DMI read and atomic snapshot persistence under `DECKY_PLUGIN_SETTINGS_DIR`.
 - Repository scaffold, licence and contribution guide.
 - `docs/ARCHITECTURE.md` — verified `SteamClient` API surface for applying settings, the Deck
   Verified API shape, and the proposed module layout.

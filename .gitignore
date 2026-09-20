@@ -1,11 +1,24 @@
 node_modules/
+.pnpm-store/
 dist/
 backend/out/
+coverage/
+out/
+cli/
+
 __pycache__/
 *.pyc
+# the loader injects its own copy at runtime — never commit one
+decky_plugin.py
+
+*.tsbuildinfo
 *.log
 *.zip
-*.tsbuildinfo
-coverage/
+.env
+
+.vscode/settings.json
+.idea/
+*.iml
 .DS_Store
+Thumbs.db
 .gstack/

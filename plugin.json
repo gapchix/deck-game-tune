@@ -1,0 +1,11 @@
+{
+  "name": "Deck Game Tune",
+  "author": "gapchix",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": ["game-settings", "performance", "utility"],
+    "description": "Applies community-proven per-game settings from Deck Verified — TDP, frame cap, Proton version, launch options, resolution. Shows you the diff first, and every change is revertible.",
+    "image": "https://opengraph.githubassets.com/1/gapchix/deck-game-tune"
+  }
+}

@@ -76,6 +76,9 @@ These are load-bearing, not preferences:
   pretended away.
 - **Say how much we actually know.** One report from a different device is not the same as six
   from yours, and the UI should not make them look alike.
+- **No root.** Everything goes through Steam's own APIs plus this plugin's settings directory.
+  Deck Game Tune writes nothing to `sysfs` and ships `"flags": []`, unlike power plugins that need
+  root and a background loop to hold their values against Steam's UI.
 
 ## What can actually be applied
 
