@@ -10,6 +10,13 @@ Pre-alpha. Nothing released yet.
 
 ### Added
 
+- `src/api/deckVerified.ts` — typed, cached client for the Deck Verified API. One request per
+  app, 30-minute TTL, never polled.
+- `src/data/reports.ts` — ranks reports for the user's hardware through device tiers
+  (exact model / other Deck revision / different handheld), drops reports with nothing
+  applicable, and decides when two reports differ enough to be worth offering as a choice.
+- Real API responses in `fixtures/` covering device-label normalisation and the
+  no-report-for-your-model fallback.
 - Plugin toolchain: pnpm 9, `@decky/ui`, `@decky/api`, rollup via `@decky/rollup`, plus Vitest,
   ESLint and Prettier.
 - `src/steam/session.ts` — tracks the running game via `RegisterForAppLifetimeNotifications`.
