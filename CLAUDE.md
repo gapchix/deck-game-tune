@@ -8,8 +8,13 @@ this idea and not a different one — don't re-derive that; it cost a full sessi
 
 ## Status
 
-Pre-alpha. No code yet. [`docs/SPIKE.md`](docs/SPIKE.md) is the gate: until the protobuf question
-is answered on real hardware, don't build product code on top of `Perf.UpdateSettings`.
+Pre-alpha. M1 (toolchain, running-app trigger, device identity) and M2 (API client, report
+ranking) have landed. **Next: M3** — the pure `ApplyPlan` builder.
+
+[`docs/SPIKE.md`](docs/SPIKE.md) gates only `Perf.UpdateSettings` — frame limit, TDP, GPU clock
+and scaling filter. Don't build on that call until it's answered on hardware. Everything else,
+including the whole Tier A apply path (Proton, launch options, resolution), is unaffected and
+should proceed.
 
 ## Hard constraints
 
@@ -38,6 +43,18 @@ the API, don't vendor it, and credit them in the UI.
 
 ## Testing
 
-`src/apply/plan.ts` is pure — `(report, currentState, limits) => ApplyPlan` — and is where device
-filtering, clamping and no-op elimination live. That's the part that can and should be unit-tested
-off-device. Everything else needs hardware.
+Everything under `src/data/` and `src/apply/plan.ts` is pure — no network, no `SteamClient` — and
+that is where the real logic lives: device normalisation, report ranking, clamping, no-op
+elimination. Test it off-device with Vitest against the real API captures in `fixtures/`, and
+push logic down into these modules rather than into components so it stays testable.
+
+Everything else needs hardware. `pnpm test`, `pnpm typecheck`, `pnpm lint` and `pnpm build` should
+all pass before a commit.
+
+Two corpus facts worth not rediscovering, both encoded in tests:
+
+- The same device is labelled several ways (`Valve Steam Deck OLED` 200 reports vs
+  `Steam Deck OLED` 60). Matching raw strings loses most of the data.
+- A game can have several reports and none from your model — Cyberpunk 2077 has six, zero OLED.
+  Matching must degrade through tiers, and a report from other hardware must never be presented
+  as if it were a match.
