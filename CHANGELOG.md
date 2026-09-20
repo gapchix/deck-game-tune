@@ -10,6 +10,10 @@ Pre-alpha. Nothing released yet.
 
 ### Added
 
+- `src/apply/plan.ts` — the pure diff builder: `(report, current, limits) => ApplyPlan`. Clamps
+  every number to what the hardware accepts, snaps frame caps to the options Steam actually
+  offers, drops changes that would change nothing, blocks (rather than skips) a Proton build that
+  is not installed, and carries in-game graphics settings through as read-only notes.
 - `src/api/deckVerified.ts` — typed, cached client for the Deck Verified API. One request per
   app, 30-minute TTL, never polled.
 - `src/data/reports.ts` — ranks reports for the user's hardware through device tiers

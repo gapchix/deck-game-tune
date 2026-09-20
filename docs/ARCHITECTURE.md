@@ -39,6 +39,16 @@ additional_notes, performance_rating
 `@decky/api` exports `fetchNoCors`, which is how a plugin reaches this from the Steam UI context.
 **No backend of our own is required.**
 
+Two things about these values that will bite if assumed:
+
+- **Numeric fields arrive as numbers here, but as strings in the underlying report form.** The
+  same `tdp_limit` is `8` from the API and `"8"` in the GitHub issue body. `coerceNumber` in
+  `src/data/reports.ts` takes either; don't compare raw.
+- **"Filled in" is not "actionable."** The report template marks several fields required, so
+  `steam_play_compatibility_tool_used` is populated in 100% of reports and `scaling_filter` in
+  99% — almost always at their defaults ("Steam Proton"/"default", "Linear"), which mean *no
+  change*. Any fill-rate measured without excluding those is wrong.
+
 ## Applying settings — verified
 
 ### Direct `SteamClient.Apps` calls
