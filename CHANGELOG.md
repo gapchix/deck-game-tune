@@ -10,6 +10,13 @@ Pre-alpha. Nothing released yet.
 
 ### Added
 
+- Tier A apply and revert. `src/apply/execute.ts` writes launch options, Proton version and
+  resolution, always saving a revert point first — if that save fails, nothing is applied.
+  `src/steam/apps.ts` wraps the SteamClient calls, `main.py` persists snapshots atomically.
+- `src/ui/` — the Quick Access panel: the diff, clamp and blocked explanations, an Apply button,
+  and Undo. The intent picker appears only when the reports for that game actually disagree,
+  which measurement says is 7.8% of them.
+- `docs/VERIFY.md` — the on-device checklist, including the assumptions that tests cannot cover.
 - `src/apply/plan.ts` — the pure diff builder: `(report, current, limits) => ApplyPlan`. Clamps
   every number to what the hardware accepts, snaps frame caps to the options Steam actually
   offers, drops changes that would change nothing, blocks (rather than skips) a Proton build that
